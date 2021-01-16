@@ -1,0 +1,30 @@
+@import "config";
+
+* {
+  box-sizing: border-box;
+}
+html {
+  overflow: auto;
+  height: 100%;
+  background-color: #ffffff;
+}
+body {
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.slide_in {
+  @include slide_in(-20px, 1);
+}
+.slide_out {
+  @include slide_out(0, 1);
+}
+.expanded {
+  @include expanded(1);
+}
+.collapsed {
+  @include collapsed(1);
+}
+.faded {
+  opacity: 0.4;
+}

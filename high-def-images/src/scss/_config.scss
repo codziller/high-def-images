@@ -1,0 +1,41 @@
+@mixin d_flex($direction, $align, $justify) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+@mixin no_style() {
+  background: none;
+  border: none;
+  outline: none;
+  &:hover {
+    border: none;
+    outline: none;
+  }
+  &:active {
+    border: none;
+    outline: none;
+  }
+}
+
+@mixin slide_in($n, $t) {
+  transform: translateX($n);
+  opacity: 0;
+  transition: transform $t * 0.2s ease-in;
+}
+@mixin slide_out($n, $t) {
+  transform: translateX($n);
+  opacity: 1;
+  transition: transform $t * 0.2s ease-out;
+}
+
+@mixin collapsed($t) {
+  transform: scaleY(0);
+  opacity: 0;
+  transition: transform $t * 0.2s ease-in;
+}
+@mixin expanded($t) {
+  transform: scaleY(1);
+  opacity: 1;
+  transition: transform $t * 0.2s ease-out;
+}

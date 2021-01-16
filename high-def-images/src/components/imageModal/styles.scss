@@ -1,0 +1,55 @@
+@import "../../scss/config";
+.backdrop {
+  background-color: #7d7e81;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100vh;
+  z-index: 9999;
+  overflow: hidden;
+  div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    @include d_flex(column, center, center);
+    button {
+      @include no_style();
+      margin: 10px 8% 0 auto;
+      svg {
+        color: #ffffff;
+      }
+    }
+    figure {
+      width: 75%;
+      height: 95%;
+      z-index: 99999;
+      background-color: #ffffff;
+      border-radius: 8px;
+      div {
+        width: 100%;
+        height: 80%;
+        border-radius: 8px 8px 0 0;
+      }
+      section {
+        height: 160px;
+        margin: 20px 0 0 20px;
+
+        .author {
+          color: #314361;
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 6px;
+        }
+        .caption {
+          color: #7b879a;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

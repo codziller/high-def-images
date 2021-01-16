@@ -1,0 +1,47 @@
+.container {
+  header {
+    background-color: #dde2e9;
+    padding: 70px 8%;
+    .search_status {
+      color: #253858;
+      margin-top: -50.3px;
+      position: relative;
+      span:last-child {
+        position: absolute;
+        top: -20px;
+        right: 20px;
+        background: none;
+      }
+    }
+  }
+  .body_section {
+    width: 100%;
+    margin-top: -55px;
+    background-color: transparent;
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fill, 13em);
+    grid-template-rows: repeat(auto-fill, 5em);
+    place-content: center;
+    padding: 0 150px;
+
+    .image_card:nth-child(1n + 1) {
+      grid-row: span 6;
+    }
+    .image_card:nth-child(2n + 2),
+    .image_card:nth-child(8n + 8) {
+      grid-row: span 8;
+    }
+    .image_card:nth-child(3n + 3) {
+      grid-row: span 7;
+    }
+    .image_card:nth-child(4n + 4),
+    .image_card:nth-child(7n + 7) {
+      grid-row: span 10;
+    }
+    .image_card:nth-child(5n + 5),
+    .image_card:nth-child(6n + 6) {
+      grid-row: span 10;
+    }
+  }
+}
