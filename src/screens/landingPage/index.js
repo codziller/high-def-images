@@ -12,7 +12,7 @@ const LandingPage = () => {
 
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [searchLoading, setSearchLoading] = useState(false);
+
   const [searchText, setSearchText] = useState("");
   const [images, setImages] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -20,13 +20,13 @@ const LandingPage = () => {
   const [searchDisplay, setSearchDisplay] = useState("expanded");
   const [statusDisplay, setStatusDisplay] = useState("collapsed");
 
-  useEffect(async () => {
-    await getPhotos();
+  useEffect(() => {
+    getPhotos();
   }, []);
 
   const getPhotos = async (e) => {
     setLoading(true);
-    unsplash.search
+    await unsplash.search
       .photos("African", 1, 8, "latest")
       .then(toJson)
       .then((json) => {
@@ -44,12 +44,12 @@ const LandingPage = () => {
     setStatusDisplay("expanded");
     setSearchDisplay("collapsed");
     setLoading(true);
-    unsplash.search
+    await unsplash.search
       .photos(searchValue, 1, 8)
       .then(toJson)
       .then((json) => {
         setImages(json.results);
-        if (json.results.length == 0) {
+        if (json.results.length === 0) {
           setSearchText("No Results Found for");
         } else {
           setSearchText("Search Results for");
@@ -60,14 +60,13 @@ const LandingPage = () => {
         alert(error);
       })
       .finally(() => {
-        setSearchLoading(false);
         setLoading(false);
       });
   };
 
   const toggleSearchStatus = () => {
-    setStatusDisplay(statusDisplay == "expanded" ? "collapsed" : "expanded");
-    setSearchDisplay(searchDisplay == "expanded" ? "collapsed" : "expanded");
+    setStatusDisplay(statusDisplay === "expanded" ? "collapsed" : "expanded");
+    setSearchDisplay(searchDisplay === "expanded" ? "collapsed" : "expanded");
   };
   return (
     <div className="container">
