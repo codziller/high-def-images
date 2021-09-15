@@ -13,7 +13,7 @@ const ImageModal = ({ loading, src, author, caption, onClick }) => {
       )) || (
         <div className="modal-body">
           <button onClick={onClick}>
-            <CloseIcon fill="white" />
+            <CloseIcon fill="brown" />
           </button>
           <figure className="modal_image">
             <div
