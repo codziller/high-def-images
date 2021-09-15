@@ -1,6 +1,6 @@
 import React from "react";
 import "./scss/App.scss";
-import LandingPage from "./screens/landingPage";
+import LandingPage from "./screens/home";
 const App = () => {
   return (
     <div className="App">

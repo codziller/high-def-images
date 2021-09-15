@@ -3,18 +3,20 @@ import SearchBar from "../../components/searchBar";
 import ImageCard from "../../components/imageCard";
 import ImageModal from "../../components/imageModal";
 import Unsplash, { toJson } from "unsplash-js";
-import { CloseIcon } from "../../components/icons";
+import Sticky from "react-sticky-el";
+import Logo from "../../components/logo";
+
 import "./styles.scss";
 const LandingPage = () => {
   const unsplash = new Unsplash({
-    accessKey: "dSKsLKPTUg-IAsppiQ3Rvu_hqggbVBZqISzIoZXNW48",
+    accessKey: process.env.REACT_APP_ACCESS_KEY,
   });
 
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
   const [searchText, setSearchText] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([{}, {}, {}, {}, {}, {}, {}, {}]);
   const [showModal, setShowModal] = useState(false);
   const [currentImage, setCurrentImage] = useState({});
   const [searchDisplay, setSearchDisplay] = useState("expanded");
@@ -27,7 +29,7 @@ const LandingPage = () => {
   const getPhotos = async (e) => {
     setLoading(true);
     await unsplash.search
-      .photos("African", 1, 8, "latest")
+      .photos("African", 1, 24, "latest")
       .then(toJson)
       .then((json) => {
         setImages(json.results);
@@ -45,7 +47,7 @@ const LandingPage = () => {
     setSearchDisplay("collapsed");
     setLoading(true);
     await unsplash.search
-      .photos(searchValue, 1, 8)
+      .photos(searchValue, 1, 24)
       .then(toJson)
       .then((json) => {
         setImages(json.results);
@@ -61,6 +63,9 @@ const LandingPage = () => {
       })
       .finally(() => {
         setLoading(false);
+        window.scrollTo({
+          top: 0,
+        });
       });
   };
 
@@ -71,20 +76,22 @@ const LandingPage = () => {
   return (
     <div className="container">
       <header>
-        <SearchBar
-          className={searchDisplay}
-          onChange={(e) => setSearchValue(e.target.value)}
-          value={searchValue}
-          arrowClass={(searchValue && "slide_out") || "slide_in"}
-          onSubmit={(e) => searchPhotos(e)}
-          disabled={!searchValue || loading}
-        />
-        <h1 className={`search_status ${statusDisplay}`}>
-          {searchText} <span className="faded">{` "${searchValue}"`}</span>{" "}
-          <span onClick={() => toggleSearchStatus()}>
-            <CloseIcon fill="black" />
-          </span>
-        </h1>
+        <Logo />
+
+        <Sticky stickyClassName={"sticky-searchbar"}>
+          <SearchBar
+            className={searchDisplay}
+            onChange={(e) => setSearchValue(e.target.value)}
+            value={searchValue}
+            arrowClass={(searchValue && "slide_out") || "slide_in"}
+            onSubmit={(e) => searchPhotos(e)}
+            disabled={!searchValue || loading}
+            statusDisplay={statusDisplay}
+            searchText={searchText}
+            searchValue={searchValue}
+            toggleSearchStatus={() => toggleSearchStatus()}
+          />
+        </Sticky>
       </header>
 
       <div className="body_section">
@@ -93,11 +100,11 @@ const LandingPage = () => {
             return (
               <ImageCard
                 loading={loading}
-                key={image.id}
-                src={image.urls.small}
-                alt={image.alt_description}
-                author={image.user.name}
-                caption={image.user.location || "City, Country"}
+                key={image?.id || "" + i + i}
+                src={image?.urls?.small}
+                alt={image?.alt_description}
+                author={image?.user?.name}
+                caption={image?.user?.location || "City, Country"}
                 className={`image_card${i}`}
                 onClick={async () => {
                   setCurrentImage(image);
@@ -110,18 +117,18 @@ const LandingPage = () => {
           })}
       </div>
 
-      {showModal && (
+      {showModal ? (
         <ImageModal
-          src={currentImage.urls.full}
-          alt={currentImage.alt_description}
-          author={currentImage.user.name}
-          caption={currentImage.user.location || "City, Country"}
+          src={currentImage?.urls?.small}
+          alt={currentImage?.alt_description}
+          author={currentImage?.user?.name}
+          caption={currentImage?.user?.location || "City, Country"}
           onClick={() => {
             setShowModal(false);
             document.body.style.overflowY = "unset";
           }}
         />
-      )}
+      ) : null}
     </div>
   );
 };

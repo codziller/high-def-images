@@ -1,11 +1,31 @@
 .container {
   header {
     background-color: #dde2e9;
-    padding: 70px 8%;
+    padding: 40px 8%;
+
+    .sticky-searchbar{
+      padding: 20px;
+      background-color: #dde2e9;
+      transition: all 0.2s ease;
+      z-index: 9999999;
+      width: 100% !important;
+      left: 0;
+    }
+    .sticky-search-status{
+      top: 70px;
+      padding: 20px;
+      background-color: #dde2e9;
+      transition: all 0.7s ease;
+      z-index: 9999999;
+      width: 100% !important;
+      left: 0;
+    
+    }
     .search_status {
       color: #253858;
-      margin-top: -50.3px;
+      margin: -10.3px auto 0;
       position: relative;
+      text-align: center;
       span:last-child {
         position: absolute;
         top: -20px;
@@ -13,10 +33,18 @@
         background: none;
       }
     }
+    .logo{
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      margin: 0;
+      width: 24px;
+      height: 24px;
+    }
   }
   .body_section {
     width: 100%;
-    margin-top: -55px;
+    margin-top: -25px;
     background-color: transparent;
     display: grid;
     grid-gap: 2em;
@@ -24,7 +52,12 @@
     grid-template-rows: repeat(auto-fill, 5em);
     place-content: center;
     padding: 0 150px;
-
+    @media screen and(max-width:500px) {
+      grid-template-columns: repeat(auto-fill, 18em);
+    }
+    @media screen and(max-width:747px) {
+      padding: 0 40px;
+    }
     .image_card:nth-child(1n + 1) {
       grid-row: span 6;
     }

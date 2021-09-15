@@ -18,6 +18,8 @@
   }
 }
 
+
+
 @mixin slide_in($n, $t) {
   transform: translateX($n);
   opacity: 0;
@@ -33,6 +35,7 @@
   transform: scaleY(0);
   opacity: 0;
   transition: transform $t * 0.2s ease-in;
+ 
 }
 @mixin expanded($t) {
   transform: scaleY(1);

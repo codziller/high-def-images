@@ -24,6 +24,7 @@ body {
 }
 .collapsed {
   @include collapsed(1);
+  position: fixed !important;
 }
 .faded {
   opacity: 0.4;

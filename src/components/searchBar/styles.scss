@@ -2,6 +2,8 @@
 
 .search_bar {
   width: 100%;
+  max-width: 900px;
+  margin: auto;
   background-color: #ffffff;
   border-radius: 6px;
   padding: 5px 20px;
@@ -28,4 +30,13 @@
     @include no_style();
     cursor: pointer;
   }
+}
+.logo-alt{
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  z-index: 9999;
 }
